@@ -1,5 +1,12 @@
+import json
+
+
 class RequestError(Exception):
-    def __init__(self, res_code, res_msg):
+    '''
+    访问基础异常类
+    '''
+
+    def __init__(self, res_code=400, res_msg='request_fail'):
         super(RequestError, self).__init__()
         self.res_code = res_code
         self.res_msg = res_msg
@@ -9,4 +16,4 @@ class RequestError(Exception):
             'res_code': self.res_code,
             'res_msg': self.res_msg
         }
-        return res
+        return json.dumps(res)
