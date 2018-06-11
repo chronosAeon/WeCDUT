@@ -1,6 +1,6 @@
-from CDUTRestful.app.Exception import LoginError
+from CDUTRestful.app.Exception.RequestError import RequestError
 
 
-class FakeTokenError(LoginError):
+class FakeTokenError(RequestError):
     def __init__(self, res_code='4000', res_msg='fake_token'):
-        super(LoginError, self).__init__(res_code, res_msg)
+        super(RequestError, self).__init__(res_code, res_msg)

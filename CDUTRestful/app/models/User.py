@@ -9,7 +9,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from itsdangerous import SignatureExpired, BadSignature
 from flask import current_app
 
-from CDUTRestful.app.web import User
+# from CDUTRestful.app.web import User
 
 
 class User(db.Model):
@@ -18,9 +18,9 @@ class User(db.Model):
     会以对象数据加入行
     '''
     id = Column(Integer, primary_key=True)
-    open_id = Column(Text, nullable=False, unique=True)
-    session_id = Column(Text, nullable=False, unique=True)
-    token = Column(String(255), unique=True)
+    open_id = Column(String(255), nullable=False, unique=True)
+    session_id = Column(String(255), nullable=False, unique=True)
+    token = Column(String(255), default=None)
     stu_id = Column(String(255), nullable=False, unique=True)
     token_verify_time = Column(DateTime)
     password = Column(String(255), nullable=False)
@@ -44,7 +44,10 @@ class User(db.Model):
         self.open_id = bcrypt.generate_password_hash(open_id)
         self.session_id = bcrypt.generate_password_hash(session_id)
         self.token_verify_time = token_verify_time
-        self.token = self.generate_auth_token(stu_id, password, token_verify_time)
+        if stu_id and password and token_verify_time:
+            self.token = self.generate_auth_token(stu_id, password, token_verify_time)
+        else:
+            self.token = None
         if password and stu_id:
             self.stu_id = stu_id
             self.password = bcrypt.generate_password_hash(password)
@@ -57,6 +60,8 @@ class User(db.Model):
     def generate_auth_token(self, stu_id, password, token_verify_time):
         s = Serializer(current_app.config['SECRET_KEY'], expires_in=current_app.config['Token_duration'])
         return s.dumps({'stu_id': stu_id, 'password': password, 'time_validate': token_verify_time})
+
+
 
     @staticmethod
     def verify_auth_token(token):

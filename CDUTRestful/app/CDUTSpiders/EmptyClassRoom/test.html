@@ -1,0 +1,1464 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	成都理工大学教务管理系统学生服务平台
+</title><link href="../../css/conn.css" type="text/css" rel="stylesheet" /><link href="../../css/layout.css" type="text/css" rel="stylesheet" /><link href="../../css/content.css" rel="stylesheet" type="text/css" />
+     <script type='text/javascript' src='/js/jquery-1.8.1.min.js'></script>
+    
+    <script src="../../js/miniui/miniui.js" type="text/javascript"></script>
+    <link href="../../js/miniui/themes/default/miniui.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form method="post" action="./EmptyClassRoom.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="7EB77B99" />
+	<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdABIJWTWsc+b2hNIELezOaIOIWKVrV/Lgio6ll2hdQg88Z1pgy3TOwf55SgKe3aJtBQY4yAAHayGEuMf65kg5Klk224f2Al1AH5b/xiz9s5fvLPJwA3zBPnLkFkgzqryBi6trDleyZpCqGaamlthPjHmPdrkL0TfgYyELCva3D0Ve6KHTYUmdKOl4qV8qwZijiXFsXtRv8UlWIoHf5PM8c8aQVN8s9VX8WrZNmNtHmNQJgJYdUhK3iAiW0IV7Tay+PXw8vhcrrpaNPjpoUMQJYGox0oYAIAS/iw+rJm6WVjSFW14Sxp17ITOZiKiRy8sV0zbEtkbtgixLRuK3keRFowXcG1T/dmuFP/zMxYUoQOqnm7/KooQky5IjKuane0Gb5cfXL2IMIdyngjHiXYwbH9i8K+vvhhUMTToNkS4nmzg4Ew==" />
+</div>
+    <!--顶部-->
+    <div class="head">
+        <div class="header">
+            <div class="top_link">
+                <span class="top_links">
+                    <p class='ico_user ico_blue'>
+                              胡浪羽
+		        (201505090215)   
+                    </p>
+                    <p class="ico_fav">
+                  <a href="/ModiPassWord.aspx">修改密码</a></p>
+                    <p class="top_line">
+                    </p>
+                    <p class="ico_exit">
+                        <a href="/LoginOut.aspx">退出</a></p>
+                </span>
+		       
+               
+            </div>
+        </div>
+    </div>
+    <!--主体内容-->
+    <div class="conteiner">
+        <div class="nav" style="margin-bottom: 20px;">
+            <ul>
+                <li><a href="/Default.aspx" >
+                    <span class="nav_menu_01">首页</span></a>
+                </li>
+                <!-- id="nav_menu_01"用于选中状态下的样式-->
+                <li><a href="#" ><span class="nav_menu_02">个人中心</span></a>
+                    <ul class="nav_sub">
+                        <li><a href="/MyMessage/MyMsgForm.aspx"><span class="nav_menu_01">我的消息</span></a></li>
+                        <li><a href="/StudentInfo/Default.aspx"><span class="nav_menu_01">个人资料</span></a></li>
+                        <li><a href="/RewardsAndPunishments/PunishmentsInfo.aspx"><span class="nav_menu_01">奖惩信息</span></a></li>
+                        <li><a href="/StudentInfo/StudentsManagement/StudentsInReading.aspx"><span class="nav_menu_01">在读证明</span></a></li>
+                        <li><a href="/StudentInfo/StudentsManagement/IdentityCard.aspx"><span class="nav_menu_01">学生证信息</span></a></li>
+                        <li><a href="/ModiPassWord.aspx"><span class="nav_menu_01">密码修改</span></a></li>
+                    </ul>
+                </li>
+                <li><a href="#" ><span class="nav_menu_03">信息查询</span></a>
+                    <ul class="nav_sub">
+                        <li><a href="/Classroom/ProductionSchedule/ProductionScheduleInfo.aspx"><span class="nav_menu_01">课表查询</span></a></li>
+                        <li><a href="/SearchInfo/Specialty/Default.aspx"><span class="nav_menu_01">专业查询</span></a></li>
+                        <li><a href="/Teachers/Teachers.aspx"><span class="nav_menu_01">教师查询</span></a></li>
+                        <li><a href="/SearchInfo/Building/Default.aspx"><span class="nav_menu_01">教室查询</span></a></li>
+                        <li><a href="/SearchInfo/Building/EmptyClassRoom.aspx"><span class="nav_menu_01">空教室查询</span></a></li>        
+                        <li><a href="/Classroom/BorrowList.aspx"><span class="nav_menu_01">教室借用</span></a></li>
+                    </ul>
+                </li>
+
+                <li><a href="/SelectCourse/" ><span class="nav_menu_04"> 选 课 </span></a>
+                
+                </li>
+
+               <li><a href="#" ><span class="nav_menu_08">重修报名</span></a>
+                <ul class="nav_sub">
+                        <li><a href="/restudy/bm.aspx"><span class="nav_menu_01">重修报名</span></a></li>
+                       <li><a href="/restudy/sf.aspx"><span class="nav_menu_01">刷分报名</span></a></li>
+                        <li><a href="/restudy/list.aspx"><span class="nav_menu_01">报名结果查询</span></a></li>
+                    <li><a href="/restudy/history.aspx"><span class="nav_menu_01">报名历史记录</span></a></li>
+                        
+                        
+                    </ul>
+                <li><a href="#" ><span class="nav_menu_08">成绩</span></a>
+                <ul class="nav_sub">
+                        <li><a href="/SearchInfo/Score/ScoreList.aspx"><span class="nav_menu_01">课程考试成绩</span></a></li>
+                       <li><a href="/Rank/RankExamScore.aspx"><span class="nav_menu_01">其他成绩</span></a></li>
+                        
+                        
+                    </ul>
+                </li>
+               
+
+               <li><a href="/TeachingEvaluation/List.aspx"><span class="nav_menu_03">学生评教</span></a></li>
+
+        </div>
+        
+    <!--左侧栏目-->
+    <div class="left_bar">
+        
+<span class="left_bar_top">
+    <p class="left_title">
+        学生信息</p>
+              
+</span>
+<div class="left_bar_bg">
+    <span class="img">
+        
+        <img width="134" alt="我的靓照" src="/../BaseUI/GetMyPhoto.ashx?id=2018/5/14 10:32:23"/>
+    </span>
+    <ul class="student_infor">
+        <li>姓名：胡浪羽</li>
+        <li>院系：地球物理学院</li>
+        <li>专业：0509空间信息与数字技术</li>
+        <li>学号：201505090215</li>
+        
+    </ul>
+</div>
+<span class="left_bar_bot"></span>
+    </div>
+    <!--右侧栏目-->
+    <!--右侧栏目-->
+    <div class="right_bar">
+        <div class="right_bar_top">
+            <span class="ico_postion">当前位置：首页 > 空教室列表</span>
+        </div>
+        <div class="right_bar_bg">
+            <div class="right_bar_box">
+                <span class="right_infor_title">
+                    空教室列表
+                </span>
+                <div class="right_specialty_list">
+                    <table class="table_normal">
+                        <tr>
+                            <td>
+                                教学楼：
+                            </td>
+                            <td>
+                                <select name="ctl00$Content$dllTeachingBuilding" id="Content_dllTeachingBuilding" class="txt_normal">
+	<option value=""></option>
+	<option value="01        "> 教学1楼</option>
+	<option value="02        "> 教学2楼</option>
+	<option value="03        "> 教学3楼</option>
+	<option value="04        "> 教学4楼</option>
+	<option value="05        ">教学5楼</option>
+	<option selected="selected" value="06A       "> 六教A座</option>
+	<option value="06B       "> 六教B座</option>
+	<option value="06C       "> 六教C座</option>
+	<option value="07        ">教学7楼</option>
+	<option value="08        "> 教学8楼</option>
+	<option value="10        "> 教学9楼</option>
+	<option value="E1        "> 东区1教</option>
+	<option value="E2        "> 东区2教</option>
+	<option value="Y         ">艺术大楼</option>
+
+</select>
+                            </td>
+                            <td>
+                                日期：
+                            </td>
+                            <td>
+                                <input name="ctl00$Content$EmptyDate" type="text" id="Content_EmptyDate" class="mini-DatePicker" value="2018-05-22" format="yyyy-MM-dd" />
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                                <input type="submit" name="ctl00$Content$btnSubmit" value="查询" id="Content_btnSubmit" class="blue_button" />
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="f_left">
+                    
+                            <ul class="right_infor_list listUl">
+                                <li class="head">
+                                    <div class="floatDiv20">
+                                        教室名称
+                                    </div>
+                                    <div class="floatDiv10">
+                                        座位数
+                                    </div>
+                                    <div class="floatDiv10">
+                                        1-2节
+                                    </div>
+                                    <div class="floatDiv10">
+                                        3-4节
+                                    </div>
+                                    <div class="floatDiv10">
+                                        5-6节
+                                    </div>
+                                    <div class="floatDiv10">
+                                        7-8节
+                                    </div>
+                                    <div class="floatDiv20">
+                                        9-11节
+                                    </div>
+                                </li>
+                            </ul>
+                            <ul class="right_infor_list listUl" style="height: 340px; overflow: auto;">
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A101</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    152
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A102</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A103</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    35
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A104</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A105</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A107</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A1072</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    5
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A108</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A1082</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    5
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A109</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A110</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A201</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    100
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A202</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A203</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    40
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A204</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A205</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    100
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A206</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A207</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A208</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A209</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A210</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    外部借用
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    外部借用</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A301</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    152
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A302</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A304</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A305</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A306</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A307</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    外部借用
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    外部借用</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A308</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A309</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A310</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A401</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    152
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A402</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A404</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A405</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A406</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A407</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    70
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A408</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    108
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    外部借用</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A409</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    160
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A410</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    80
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A501</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    90
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A502</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    90
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A503</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    90
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A504</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    65
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A506</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    65
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    正常教学
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A508</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    65
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A509</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    100
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A510</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    100
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A601</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A602</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A603</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A604</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A605</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A606</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A607</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A607-1</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    0
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A608</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A609</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    正常教学</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A610</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_D" class="floatDiv10">
+                                    正常教学</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A610_1</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            <li class="item">
+                                <div class="floatDiv20">
+                                    6A610_2</a>
+                                </div>
+                                <div class="floatDiv10">
+                                    30
+                                </div>
+                                <div id="div_A" class="floatDiv10">
+                                    空闲中
+                                </div>
+                                <div id="div_B" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_C" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_D" class="floatDiv10">
+                                    空闲中</div>
+                                <div id="div_E" class="floatDiv20">
+                                    空闲中</div>
+                            </li>
+                        
+                            </ul>
+                        
+                </div>
+            </div>
+        </div>
+        <span class="right_bar_bot"></span>
+    </div>
+    <script type="text/javascript">
+        mini.parse();
+        $(function () {
+            $(".item div").each(function () {
+                var divVal = $(this).text();
+                var value = trim(divVal);
+                var Ids = $(this).attr("id");
+                if (Ids == "div_A" || Ids == "div_B" || Ids == "div_C" || Ids == "div_D" || Ids == "div_E") {
+                    $(this).css("text-align", "center");
+                    if (value == "正常教学") {
+                        $(this).css("background-color", "rgb(179, 53, 53)");
+                        $(this).css("color", "#fff");
+                       
+                    } else if (value == "外部借用") {
+                        $(this).css("background-color", "#ed72a2");
+                        $(this).css("color", "#fff");
+                    } else if (value == "考试安排") {
+                        $(this).css("background-color", "#C4951F");
+                        $(this).css("color", "#fff");
+                    } else if (value == "其他") {
+                        $(this).css("background-color", "#0bafcf");
+                        $(this).css("color", "#fff");
+                    } else if (value == "空闲中") {
+                        $(this).css("background-color", "rgb(139, 197, 255)");
+                        $(this).css("color", "#fff");
+                    }
+                } else if (value == "") {
+                    $(this).text("-");
+                }
+
+
+            });
+        });
+
+        //删除左右两端的空格
+        function trim(str) {
+            return str.replace(/(^\s*)|(\s*$)/g, '');
+        }
+
+    </script>
+
+    </div>
+    <div class="clearfloat">
+    </div>
+    <!--底部-->
+    <div class="footer">
+        <div class="footer_box">
+            <p>学校地址: 成都市成华区二仙桥东三路1号 邮政编码: 610059</p><br />
+            <p>Copyright © 2013-2014 Academic Affairs Office of CDUT. All Rights Reserved</p>
+        </div>
+    </div>
+    </form>
+</body>
+</html>

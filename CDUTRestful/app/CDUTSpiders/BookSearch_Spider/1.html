@@ -1,0 +1,1210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<link href="/styles/hunnu/css/master.css" rel="stylesheet" type="text/css" />
+<link href="/styles/hunnu/css/list.css" rel="stylesheet" type="text/css" />
+<title>白夜行_成都理工大学图书馆</title>
+	<link href="/styles/hunnu/css/master.css" rel="stylesheet" type="text/css" />
+<link href="/styles/hunnu/css/list.css" rel="stylesheet" type="text/css" />
+<link type="text/css" rel="stylesheet" href="/styles/opac/goldlib-opac.css" />
+<link type="text/css" rel="stylesheet" href="/styles/opac/skins/blue/skin-opac.css" />
+
+<script src="/scripts/highcharts/js/jquery-1.5.js" type="text/javascript"></script>
+	
+	
+	<script type="text/javascript" src="/scripts/opac/common/common.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/scripts/opac/share/button.js"></script>
+	<script type="text/javascript" charset="utf-8" src="/scripts/opac/share/bshareC0.js"></script>
+	<script src="/scripts/highcharts/js/highcharts.js" type="text/javascript"></script>
+	<script src="/scripts/highcharts/js/modules/exporting.js" type="text/javascript"></script>
+	<script src="/scripts/main.js" type="text/javascript"></script>
+	<script src="/scripts/weebox/bgiframe.js" type="text/javascript"></script>
+	<script src="/scripts/weebox/weebox.js" type="text/javascript"></script>
+	<link href="/scripts/weebox/weebox.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="/scripts/jq_tree/jquery.treeview.js"></script>
+	<script type="text/javascript" src="/scripts/jq_tree/jquery.treeview.async.js"></script>
+	<link type="text/css" href="/scripts/jq_tree/jquery.treeview.css" rel="stylesheet" />
+	<script src="/scripts/validate/jquery.validate.min.js;jsessionid=18C783D7C1517336A3896E7A0DE49122" type="text/javascript"></script>
+	<script src="/scripts/validate/messages_cn.js;jsessionid=18C783D7C1517336A3896E7A0DE49122" type="text/javascript"></script>
+	<script src="/scripts/validate/jquery.metadata.js;jsessionid=18C783D7C1517336A3896E7A0DE49122" type="text/javascript"></script>
+	<script src="/scripts/validate/validate.extend.js;jsessionid=18C783D7C1517336A3896E7A0DE49122" type="text/javascript"></script>
+	
+<script type="text/javascript" src="http://www.metacd.com/jquery/211010.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function (){
+$.ajax({
+	url:"/opac/book/getCXBookUrl?isbn=978-7-5442-4251-6",
+	success:function (bookurl){
+     if (bookurl!=-1){
+        $("#detailsTable>tbody").append("<tr><th>电子图书：</th><td><a href='"+bookurl+"' target='_blank'><img src='/styles/opac/images/E_journal.gif'></img></a></td></tr>");
+         }else {
+        	 $("#detailsTable>tbody").append("<tr><th>电子图书：</th><td><img src='/styles/opac/images/E_journal.gif'></img>&nbsp;无记录</td></tr>");
+             }
+		}
+});
+	
+});
+
+</script>
+
+<script type="text/javascript">
+	//预约相关
+	function isAddReserver(bookid){
+		var aa=confirm("确定要预约吗?","addReserver('"+bookid+"')","");
+	}
+	function addReserver(barCode) {
+		var islogin="no";
+		if (islogin=='no'){
+			alert("请先<a href='/ucenter/login'>登录!</a>",3,null);
+		}else {
+			$.ajax({
+				type: "POSt",
+				url: "/opac/book/bespeakBook/"+barCode,
+				dateType:"json",
+				cache: false,
+				data :"",
+				success: function(result){
+					var list=eval("("+result+")");
+					alert(list.errorMessage,3,null);
+				}          
+			});
+		}
+	}
+</script>
+
+<script type="text/javascript">
+//委托相关
+	function isAddWeiTuo(barCode){
+		var aa=confirm("确定要委托吗?","addWeiTuo('"+barCode+"')","");
+		
+	}
+	function addWeiTuo(barCode) {
+		var islogin="no";
+		if (islogin=='no'){
+			alert("请先<a href='/opac/login'>登录!</a>",3,null);
+		}else {
+			$.ajax({
+				type: "POSt",
+				url: "/opac/book/entrustBook/"+barCode,
+				dateType:"json",
+				cache: false,
+				data :"",
+				success: function(result){
+					var list=eval("("+result+")");
+					alert(list.errorMessage,3,null);
+				}          
+			});
+		}
+	}
+</script>
+
+<script type="text/javascript">
+	//选显卡切换
+	$(document).ready(function (){
+		var corename='Book';
+		if (corename=='Journal'){
+			showdiv('journal');
+		} 
+		else{
+			showdiv('gc');
+		}
+	});
+	function showdiv(tag){
+		$("#a"+tag).attr("class","current");
+		$(".tabbable .nav-tabs a[id!=a"+tag+"]").attr("class","");
+		$("#div"+tag).show();
+		$("div[name='bookinfo'][id!=div"+tag+"]").hide();
+	
+	    //相关评论
+		if (tag=="pl"){
+			getCommentInfo();
+		}
+		//馆藏信息
+		if(tag=="gc"){
+			getLibInfo();
+			getCollectInfo();
+		}
+		//相关借阅
+		if (tag=="lend"){
+			 $("#divlend").html("<span class=\"noContent\">数据正在加载中……</span>");
+			 getBorrowerRelationList();
+		}
+		//附件信息
+	     if (tag=="fj"){
+	    	 $("#divfj").html("<span class=\"noContent\">数据正在加载中……</span>");
+	    	 $.post("/opac/book/attachmentList",{bookId:"898502"},function (result){
+	        	 	if($.trim(result)==""){
+	        	 		$("#divfj").html("<span class=\"noContent\">无附件信息</span>");
+	        	 	}
+	        	 	else{
+	        	 		$("#divfj").html(result);
+	        	 	}
+			        
+			});  
+	     }
+		//期刊签到信息
+	     if (tag=="journal"){
+    	 	if($.trim($("#tree").html()).length==0){
+    	 		$("#tree").treeview({
+	    	     	url:"/opac/book/journalSignInfo?bookId=898502"
+	    	 	});
+    	 	}
+	     }
+	     //借阅趋势
+	     if(tag=="lendTrend"){
+	    	 getBorrowedTrendList();
+	     }
+	}
+</script>
+
+<script type="text/javascript">
+	function showmore(){
+		$('.seriesArea').show();
+		$('#showmore').hide();
+		}
+	function packup(){
+		$('.seriesArea').hide();
+		$('#showmore').show();
+		}
+</script>
+
+<script type="text/javascript">
+	//加载二维码
+	$(document).ready(function (){
+		$("#imgQR").attr("src","/styles/opac/images/loading.gif");
+		$.ajax({   
+			url: "/static/QRCode/I/898502.png",
+			type:"GET",
+			processData: false,
+			success: function(){
+				console.log('success');
+				$("#imgQR").attr("src","/static/QRCode/I/898502.png");
+			},
+			error: function(){
+				console.log('{索书号=I313.45/4641=3, 题名2=白夜行, 今年外借册数=3, 库键码=1, 内容介绍=, 采编审核=0, 册数=4, 索书号12=, 索书号13=, 索书号10=, 处理日期=1372058543000, MARC类型=, 索书号11=, 修改人员=15, 题名缩写=BYX, SUMMARYS=“只希望能手牵手在太阳下散步”，这个象征故事内核的绝望念想，有如一个美丽的幌子，随着无数凌乱、压抑、悲凉的故事片段像纪录片一样一一还原：没有痴痴相思，没有海枯石烂，只剩下一个冰冷绝望的诡计，最后一丝温情也被完全抛弃，万千读者在一曲救赎罪恶的凄苦爱情中悲切动容……, 采编审核日期=, 索书号A=I313.45/4641=3, 责任者三=, 索书号8=, 责任者一=, 主键码=898502, 索书号7=, 已外借数=4, 上月外借册数=0, 索书号9=, 版次=, 索书号4=, 操作员=18, 出版日期=2008, 索书号3=, 封面地址=, 索书号6=, 索书号5=, 题名=白夜行, 去年外借册数=0, 编目审核=0, 累计外借册数=186, 责任者二=, 价格=29.8, 分类号=, 编目审核员=, 出版地=海口, 责任者=(日)东野圭吾著, 可外借数=4, 创建时间=, 出版者2=南海出版公司, 责任者四=, 采编审核员=, 图象页数=0, 预约数=3, 卷标=, 文献类型=0, 排架号=, 语种=chi, 出版者=南海出版公司, 首馆键码=1, 本月外借册数=3, 种次=, 责任者2=(日)东野圭吾著, 编目审核日期=, COVERPATH=http://img3.douban.com/lpic/s4610502.jpg, 丛书名=, 标准编码=978-7-5442-4251-6, 分类=, 封面=http://img3.douban.com/lpic/s4610502.jpg}');
+				$.ajax({
+					type: "GET",
+					url: "/opac/book/getQRCode",
+					dateType:"text",
+					async: true,
+					cache: false,
+					data : {
+						bookId:"898502",
+						letter:"I",
+						title:"白夜行",
+						callNo:"I313.45/4641=3",
+						isbn:"978-7-5442-4251-6",
+						author:"(日)东野圭吾著",
+						publisher:"南海出版公司",
+						publishDate:"2008"
+					},
+					success: function(result){
+						if(result.length>0){
+							setTimeout(function(){$("#imgQR").attr("src",result);},5000);
+							
+						}
+					}
+				});
+			} 
+		});
+	});
+</script>
+<script type="text/javascript">
+//借阅趋势
+function getBorrowedTrendList(){
+	var categoriesArray=new Array();
+	var dataArray=new Array();
+	$.ajax({
+		type: "GET",
+		url: "/opac/book/getBorrowedTrendList/898502",
+		dateType:"json",
+		cache: false,
+		data : "",
+		success: function(result){
+			if(result.length>0){
+				var list=eval("("+result+")");
+				for(var i=0;i<list.length;i++){
+					categoriesArray[i]=list[i].YEAR;
+					dataArray[i]=list[i].COUNT;
+				}
+			}
+		}
+	});
+	if($('#container').length > 0){
+		  $('#container').highcharts({
+			  exporting:{
+			  		enabled:false //用来设置是否显示‘打印’,'导出'等功能按钮，不设置时默认为显示 
+			   },
+			   chart: {
+		            type: 'spline'
+		        },
+		        title: {
+		            text: '图书年度借阅趋势'
+		        },
+		        subtitle: {
+		            text: ''
+		        },
+		        xAxis: {
+		            categories: categoriesArray
+		        },
+		        yAxis: {
+		            allowDecimals: false,
+		            title: {
+		                text: '借阅量'
+		            },
+		            min:0,
+		            labels: {
+		                formatter: function() {
+		                    return this.value +'次'
+		                }
+		            }
+		        },
+		        tooltip: {
+		            crosshairs: true,
+		            shared: true,
+		            valueSuffix: '次'
+		        },
+		        plotOptions: {
+		            spline: {
+		                marker: {
+		                    radius: 4,
+		                    lineColor: '#666666',
+		                    lineWidth: 1
+		                }
+		            }
+		        },
+		        series: [{
+		            name: '白夜行',
+		            marker: {
+		                symbol: 'square'
+		            },
+		            data: dataArray
+		        }]
+		  });
+	}
+}
+</script>
+
+<script type="text/javascript">
+	//获取相关借阅
+	function getBorrowerRelationList(){
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/getBorrowerRelationList/898502",
+			dateType:"json",
+			cache: false,
+			async: true,
+			data : {
+				num:10
+			}, 
+			success: function(result){
+				if(result.length>0){
+					var list=eval("("+result+")");
+					$("#divlend").empty();
+					var table=$("<table width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"jp-booksList\">");
+					table.appendTo($("#divlend"));
+					var trHead=$("<tr><th width=\"20%\">题名</th><th width=\"16%\">责任者</th><th width=\"16%\">出版者</th><th width=\"10%\">索书号</th></tr>");
+					trHead.appendTo(table);
+					for(var i=0;i<list.length;i++){
+						var tr=$("<tr></tr>");
+						tr.appendTo(table);
+						var td1=$("<td><a href=\"/opac/book/"+list[i].ID+"\" target=\"_blank\">"+list[i].bookMap.题名2+"</a></td>");
+						td1.appendTo(tr);
+						var td2=$("<td>"+list[i].bookMap.责任者2+"</td>");
+						td2.appendTo(tr);
+						var td3=$("<td>"+list[i].bookMap.出版者2+"</td>");
+						td3.appendTo(tr);
+						var td4=$("<td>"+list[i].bookMap.索书号A+"</td>");
+						td4.appendTo(tr);
+					}
+					$("#divlend").append("</table>");
+				}
+				else{
+					$("#divlend").html("<span class=\"noContent\">无相关借阅信息</span>");
+				}
+			}          
+		});
+	}                        
+</script>
+
+<script type="text/javascript">
+		//收藏
+		function collect(doc_id,doc_title,doc_type,author,publisher,publisherdate,call_number) {
+			var islogin="no";
+			if (islogin=="no"){
+				alert("请先<a href='/ucenter/login'>登录!</a>",3,null);
+			}
+			else {
+				$.ajax({
+					type: "POST",
+					url: "/opac/book/collectBook",
+					dateType:"json",
+					cache: false,
+					data : {
+						docid:doc_id,
+						doc_title:doc_title,
+						doc_type:doc_type,
+						author:author,
+						publisher:publisher,
+						publisherdate:publisherdate,
+						call_number:call_number
+					}, 
+					success: function(result){
+						var list=eval("("+result+")");
+						alert(list.errorMessage,3,null);
+					}          
+				});
+			}
+		}
+</script>
+
+<script type="text/javascript">
+//获取网络封面和简介
+	$(document).ready(function (){
+		var coverPath=$("#bookimage").attr("src");
+	//	if(coverPath.length<=1){
+			$("#bookimage").attr("src","/styles/opac/images/loading.gif");
+			$.ajax({
+				type: "GET",
+				url: "/opac/book/getInternetCoverAndSummary",
+				dateType:"json",
+				async: true,
+				cache: false,
+				data : {
+					bookId:'白夜行',
+					isbn:'978-7-5442-4251-6'
+				}, 
+				success: function(result){
+					$("#bookimage").attr("src","/styles/opac/images/noPicture.jpg");
+					if($.trim(result).length>0){
+						var list=eval("("+result+")");
+						if(list.imgUrl.length>0){
+							$("#bookimage").attr("src",""+list.imgUrl);
+						}
+					//	if(!($("#doubansummarys").length)){
+							if(list.summary.length>0){
+								var tr=$("<tr id=\"summarys\"></tr>");
+								tr.appendTo($("#detailsTable"));
+								var th=$("<th>豆瓣简介：</th>");
+								th.appendTo(tr);
+								var td=$("<td>"+list.summary+"</td>");
+								td.appendTo(tr);
+							}
+					//	}	
+					}
+				}          
+			});
+	//	}
+	});
+</script>
+
+<script type="text/javascript">
+//书目信息marc信息选项卡切换
+$(document).ready(function (){
+	 $("#bookdata").click(function (){
+    	 $("#bookinfo").show();
+    	 $("#bookdata").attr("class","current");
+    	 $("#marcinfo").hide();
+    	 $("#marcdata").attr("class","");
+
+        });
+	$("#marcdata").click(function (){
+		 $("#bookinfo").hide();
+		 $("#bookdata").attr("class","");
+		 $("#marcinfo").show();
+		 $(this).attr("class","current");
+		 $("#marcinfo").html("");
+		 $.ajax({
+				type: "POST",
+				url: "/opac/book/getMarcTable?bookId=898502&keyCode=1&indicant=@",
+				dateType:"json",
+				cache: false,
+				success: function(result){
+					if($.trim(result).length>0){
+						var list=eval("("+result+")");
+						var table=$("<table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\">");
+						table.appendTo("#marcinfo");
+						for(var i=0;i<list.length;i++){
+							var tr=$("<tr></tr>");
+							tr.appendTo(table);
+							var th=$("<th>"+list[i].fieldname+"&nbsp;&nbsp;</th>");
+							th.appendTo(tr);
+							var td1=$("<td width=\"6%\">"+list[i].field+"</td>");
+							td1.appendTo(tr);
+							var td2=$("<td width=\"5%\">"+list[i].order+"</td>");
+							td2.appendTo(tr);
+							var td3=$("<td>"+list[i].value+"</td>");
+							td3.appendTo(tr);
+						}
+						$("#marcinfo").append("</table>");
+					}
+				}
+		 });
+	 });
+});
+</script>
+
+<script type="text/javascript">
+	//获取分馆信息
+	function getLibInfo(){
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/getUnitHoldingGroup?bookId="+898502,
+			dateType:"json",
+			cache: false,
+			data : "", 
+			success: function(result){
+				if($.trim(result).length>0){
+					var htmlStr="<div class=\"subnav-tabs\">";
+					var list=eval("("+result+")");
+					for (var i=0;i<list.length;i++){
+						if(i==0){
+							htmlStr=htmlStr+"<a name=\"libId\" id=\""+list[i].馆键码+"\" href=\"javascript:void(0);\" onclick=\"showLib('"+list[i].馆键码+"')\" class=\"current\">"+list[i].单位名+"("+list[i].数量+")"+"</a>";
+						}
+						else{
+							htmlStr=htmlStr+"<a name=\"libId\" id=\""+list[i].馆键码+"\" href=\"javascript:void(0);\" onclick=\"showLib('"+list[i].馆键码+"')\" >"+list[i].单位名+"("+list[i].数量+")"+"</a>";
+						}
+					}
+					htmlStr=htmlStr+"</div>";
+					$("#divgc").html(htmlStr);
+				}
+			}
+		});
+	}
+</script>
+
+<script type="text/javascript">
+	//分馆聚合标签切换
+	function showLib(libId){
+		$("a[name='libId'][id!='"+libId+"']").attr("class","");
+		$("a[name='libId'][id='"+libId+"']").attr("class","current");
+		getCollectInfo();
+	}
+</script>
+
+<script type="text/javascript">
+	//获取馆藏信息
+	function getCollectInfo(){
+		var libId="";
+		if($("a[name='libId'][class='current']").length>0){
+			libId=$("a[name='libId'][class='current']").attr("id");
+		}
+		if(libId=='all'){
+			libId="";
+		}
+		$("#divgc table").remove();
+		$.ajax({
+			type: "GET",
+			url: "/opac/book/getHoldingsInformation/"+898502+"?libId="+libId,
+			dateType:"json",
+			cache: false,
+			data : "", 
+			success: function(result){
+				if($.trim(result).length>0){
+					var corename='Book';
+					/* var rfidsUrl='http://202.115.129.215/TSDW/GoToFlash.aspx?szbarcode='; */
+					var rfidsUrl='http://202.115.129.215/webrfid/TSDW/GoToFlash.aspx?szbarcode=';
+					var list=eval("("+result+")");
+					var table=$("<table id=\"gctable\" width=\"100%\" border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"jp-booksList\">");
+					table.appendTo($("#divgc"));
+					var tr=$("<tr></tr>");
+					tr.appendTo(table);
+
+					var th1=$("<th width=\"8%\">索书号</th>");
+					th1.appendTo(tr);	
+					//var th2=$("<th width=\"10%\">登录号</th>");
+					//th2.appendTo(tr);	
+					var th3=$("<th width=\"10%\">条形码</th>");
+					th3.appendTo(tr);	
+					
+					if(corename=='Journal'){
+						var th4=$("<th width=\"10%\">年卷期</th>");
+						th4.appendTo(tr);	
+						var th5=$("<th width=\"5%\">区分号</th>");
+						th5.appendTo(tr);	
+					}
+					var th6=$("<th width=\"15%\">所属校区</th>");
+					th6.appendTo(tr);
+					var th7=$("<th width=\"15%\">馆藏地址</th>");
+					th7.appendTo(tr);
+					
+					var th8=$("<th width=\"10%\">书刊状态</th>");
+					th8.appendTo(tr);
+					var th9=$("<th width=\"5%\">预约</th>");
+					th9.appendTo(tr);
+					var th10=$("<th width=\"5%\">委托</th>");
+					th10.appendTo(tr);
+					if(rfidsUrl.length>0){
+						var th11=$("<th width=\"8%\">馆藏定位</th>");
+						th11.appendTo(tr);
+					}
+
+					for (var i=0;i<list.length;i++){
+						var trResult=$("<tr></tr>");
+						if(i==list.length-1){
+							trResult=$("<tr class=\"last\"></tr>");
+						}
+						trResult.appendTo(table);
+
+						var td1=$("<td>"+list[i].索书号+"</td>");
+						td1.appendTo(trResult);
+						//var td2=$("<td>"+list[i].登录号+"</td>");
+						//td2.appendTo(trResult);
+						var td3=$("<td>"+list[i].条形码+"</td>");
+						td3.appendTo(trResult);
+						if(corename=='Journal'){
+							var td4=$("<td>"+list[i].年卷期+"</td>");
+							td4.appendTo(trResult);
+							var td5=$("<td>"+list[i].区分号+"</td>");
+							td5.appendTo(trResult);
+						}
+						var td6=$("<td>"+list[i].单位名+"</td>");
+						td6.appendTo(trResult);
+						
+						var td7=$("<td>"+list[i].部门名称+"</td>");
+						td7.appendTo(trResult);
+
+						
+						var td8=$("<td>"+list[i].bookstatus+"</td>");
+						if(list[i].borrowstatus=="不外借"){
+			        		td8=$("<td>不外借</td>");
+			        	}
+						td8.appendTo(trResult);
+						
+						
+			        	var td9=$("<td>&nbsp;</td>");
+			        	if(list[i].外借状态==1||0==1){
+				        	td9=$("<td><a href=\"javascript:void(0);\" onclick=\"isAddReserver('"+list[i].条形码+"')\">预约</a></td>");
+			        	}
+						td9.appendTo(trResult);
+
+						var td10=$("<td>&nbsp;</td>");
+			        	if(list[i].canExtracted){
+				        	td10=$("<td><a href=\"javascript:void(0);\" onclick=\"isAddWeiTuo('"+list[i].条形码+"')\">委托</a></td>");
+			        	}
+						td10.appendTo(trResult);
+
+						var td11=$("<td>&nbsp;</td>");
+						if(rfidsUrl.length>0){
+							var td11=$("<td><a target=\"_blank\" href=\""+rfidsUrl+list[i].条形码+"\">定位</a></td>");
+						}
+						td11.appendTo(trResult);
+						
+						
+						
+					}
+					
+					$("#divgc").append("</table>");
+					
+				}
+				else{
+					$("#divgc").html("<span class=\"noContent\">暂无馆藏信息</span>");
+				}
+			}          
+		});
+	}
+</script>
+<script type="text/javascript">
+//openUrl异步加载
+$(document).ready(function (){
+	$.ajax({
+		type: "GET",
+		url: "/opac/opacOpenurl/getOpenUrlByBookId/"+898502,
+		dateType:"json",
+		cache: false,
+		data : "", 
+		success: function(result){
+			if($.trim(result).length>0){
+				var list=eval("("+result+")");
+				var htmlUrl="";
+				for (var i=0;i<list.length;i++){
+					var encodedUrl=list[i].url;
+					htmlUrl=htmlUrl+"<li><a href=\""+encodedUrl+"\"target=\"_blank\">"+list[i].showName+"</a></li>";
+					
+				}
+				$("#aboutResources").prepend(htmlUrl);
+			}
+			
+		}          
+	});
+});
+</script>
+
+
+
+<script type="text/javascript">
+//图书评论提交
+$(document).ready(function (){
+	 $("#pinglun").validate({
+		 submitHandler:function(form){
+			var islogin="no";
+			if (islogin=="no"){
+				alert("请<a href='/ucenter/login'>登录!</a>后操作",3,null);
+			}
+			else{
+				 $.ajax({
+						url: "/opac/book/bookComment",
+						type: "post",
+						
+						data:$("#pinglun").serialize(),
+						success: function(msg){
+							alert(msg,3,null);
+							getCommentInfo();
+						}
+					});
+		     }    
+		}	
+	  });
+});
+
+//字符串补零
+function pad(num, n) {  
+    var len = num.toString().length;  
+    while(len < n) {  
+        num = "0" + num;  
+        len++;  
+    }  
+    return num;  
+}  
+
+//获取评论信息
+function getCommentInfo(){
+	$.ajax({
+		url: "/opac/book/getCommentInfo/"+898502,
+		type: "get",
+		dateType:"json",
+		cache: false,
+		data : "", 
+		success: function(msg){
+			var count=0;
+			
+			if(msg.length>0){
+				var list=eval("("+msg+")");
+				count=list.count;
+				if(count>0){
+					$(".booksCritique-list").show();
+					$("#pinluninfo").empty();
+					for(var i=0;i<list.commentsList.length;i++){
+						var li=$("<li></li>");
+						li.appendTo($("#pinluninfo"));
+						var h4=$("<h4></h4>");
+						h4.appendTo(li);
+						var a=$("<a href=\"javascript:;\">"+list.commentsList[i].USER_NAME+"</a>");
+						a.appendTo(h4);
+						var data = new Date(list.commentsList[i].LAST_EDIT_TIME);
+						var time=data.getFullYear()+"-"+pad((data.getMonth() + 1),2)+"-"+pad((data.getDate()),2)+" "+pad((data.getHours()),2)+":"+pad((data.getMinutes()),2)+":"+pad((data.getSeconds()),2);
+						var span=$("<span>"+time+"</span>");
+						span.appendTo(h4);
+						var div=$("<div class=\"critiqueContent\"></div>");
+						div.appendTo(li);
+						var p=$("<p>"+list.commentsList[i].CONTENT+"</p>");
+						p.appendTo(div);
+					}
+				}
+			}
+			$("#plcount").html(count);
+		}
+	});
+    $("#content").val('');
+}
+</script>
+
+<script type="text/javascript">
+//评分相关
+$(document).ready(function (){
+	ScoreInfo();
+});
+
+//获取评分信息
+function ScoreInfo(){
+	var islogin="no";
+	
+	$.ajax({
+		type: "GET",
+		url: "/opac/book/getBookScore/"+898502,
+		dateType:"json",
+		cache: false,
+		data : "", 
+		success: function(result){
+			if($.trim(result).length>0){
+				var list=eval("("+result+")");
+				if(list.myScoreMap){
+					var count=list.myScoreMap.SCORE;
+					$("#bookstar").html("");
+					for(var i=0;i<count;i++){
+						var a=$("<a href=\"javascript:void(0);\" name=\"imgMy\" class=\"scoreCurr\"></a>");
+						a.appendTo($("#bookstar"));
+					}
+				}
+				else{
+					if (islogin=="no"){
+						$("#bookstar").html("<font color=\"red\">请登录后查看</font>");
+					}
+					else{
+						//$("#bookstar").html("<font color=\"red\">尚未评分</font>");
+					}
+				}
+				var totalScore=0;
+				var scoreCount=0;
+				scoreCount=list.totalScoreMap.COUNT;
+				if(scoreCount>0){
+					totalScore=list.totalScoreMap.TOTAL;
+				}
+				$("#totalScore").attr("style","width:"+(totalScore*20)+"%");
+				$("#countScore").html("共("+scoreCount+")人");
+			}
+			
+		}          
+	});
+}
+
+
+//评分
+function bookScore(index){
+	var islogin="no";
+	if (islogin=="no"){
+		alert("请<a href='/ucenter/login'>登录!</a>后操作",3,null);
+	}
+	else{
+		 $.ajax({
+			url: "/opac/book/bookScore",
+			type: "post",
+			data:{
+				score:index,
+				bookId:"898502",
+				docType:"图书",
+				call_number:"I313.45/4641=3",
+				docTitle:"白夜行"
+			},
+			success: function(msg){
+				ScoreInfo();
+				alert(msg,3,null);
+				//$("#myrating").attr("class","totalRating pull-left");
+				
+			}
+		});
+	}
+}
+function ChangeState(index){
+	$("#bookstar>a[name='img']").each(function (i,value){
+	    if (i<index-1){
+	    	$(this).attr("class","scoreCurr");
+	        }
+	    else {
+	    	$(this).attr("class","");
+	        }
+	});
+}
+function MouseOver(index){
+	ChangeState(index);
+}
+function MouseOut(){
+	ChangeState(1);
+}
+</script>
+<script type="text/javascript">
+		$.ajaxSetup({  
+			 async : false ,
+			 cache: false 
+		});  
+	</script>
+</head>
+<body>
+<div id="wrapper">
+  <!--header-->
+  <script src="/scripts/tips.js" type="text/javascript"></script>
+  <!--百度统计代码-->
+  <script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?53738587481e609093fada48a6066f48";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+  
+<script type='text/javascript'>
+	$(function() {
+	  $('.tipTop').tipsy({gravity: 's'});
+	  $('.tipBottom').tipsy({gravity: 'n'});
+	  $('.tipRight').tipsy({gravity: 'w'});
+	  $('.tipLeft').tipsy({gravity: 'e'});
+	});
+</script>
+<script type="text/javascript">
+function checklogin(){
+	var username=document.getElementById("J_Username").value;
+	var password=document.getElementById("J_Password").value;
+	var loginType=document.getElementById("loginType").value;
+	var referer=document.getElementById("referer").value;
+	
+	$.ajax({
+		url:'/pages/ucenter/checklogin.jsp',
+		async: false,
+		scriptCharset: 'utf-8',
+		data :{
+			loginType:loginType,
+			username:username,
+			password:password,
+			referer:referer
+		},
+		success: function (data) {
+	        // console.log(data);  
+	         var json = eval('(' + data + ')');
+
+			 var reData = eval(json);
+			 var re = reData.re;
+			// var referer="";
+			 var referer = reData.referer;
+			 //console.log("re:" +reData.re);
+		    var sucess = "ok";
+		    //var re = result.trim();
+			if (re!='ok'&&re!='okconfirm'){
+				$("#checkloginmsg").html(re);
+				$("#checkloginmsg").css("display","block");
+				return false;
+				}
+			else if (re=="okconfirm"){
+				window.location.href="/ucenter/confirm?referer=";
+				}else {
+	       if (referer==""){
+	    	   referer="/";
+	           }
+			  // console.log("referer:" + referer);
+			  window.location.href=referer;
+			}
+		}
+	});
+}
+</script>
+
+<div class="header">
+  <div class="container">
+    <div class="logo fl"><a href="/index.shtml"><img src="/styles/hunnu/images/logo.png" width="370" height="106" /></a></div>
+    <div class="topLink fr">
+    	      <ul><li><a href="/category46/index.shtml">图书馆简介</a></li><li><a href="/category50/index.shtml">馆藏布局</a></li><li><a href="/category284/index.shtml">读者指南</a></li><li><a href="/category91/index.shtml">借阅指南</a></li></ul>
+
+    </div>
+  </div>
+</div>
+<div class="nav">
+<div class="nav-inner container">
+  <a href="/">首页</a><a href="/category46/index.shtml">本馆概况</a><a href="/libweb/digitalDatabase">馆藏&资源</a><a href="/category20/index.shtml">读者服务</a><a href="/category41/index.shtml">互动&沟通</a><div class="ckepop">
+      <div id="signin_menu">
+          <form id="libweb_top_login_form" name="libweb_top_login_form"  method="post">
+            <input name="referer" id="referer" value="" type="hidden" />
+            <input type="hidden" name="loginType" id="loginType" value="callNo"/>
+            <div class="error"><div id="checkloginmsg" style="display:none;"><span style="height:12px;color:white" id="J_ErrorMsg"></span></div></div>
+            <p>
+              <label for="username">用户名：</label>
+              <input id="J_Username" name="username" value="" title="请输入图书馆账号，账号默认为一卡通号!" tabindex="4" type="text" class="tipBottom">
+            </p>
+            <p>
+              <label for="password">密码：</label>
+              <input id="J_Password" name="password" value=""  tabindex="5" type="password" >
+            </p>
+            <p class="remember">
+              <input id="signin_submit" value="用户登录" tabindex="6" type="button" class="btn" onClick="checklogin();">
+            </p>
+          </form>
+        </div>
+      </div>
+  </div>
+</div><!--main-->
+  <div class="clearfix" id="main">
+      <div class="jp-wrap">
+			<input type="hidden" id="field" value="" />
+            <div class="list_nav"><div class="container"><span class="jp-bookName">白夜行</span><strong>当前位置:</strong>书籍详细信息 <span class="nohand">&gt;</span><a href="javascript:;">白夜行</a></div></div>
+			<div class="jp-main">
+
+				<div class="jp-viewContent">
+					<div class="jp-viewLeft">
+						<div class="jp-content">
+							<h3 class="nav-tabs">
+								<a href="javascript:;" class="current" id="bookdata">书目信息</a><a
+									href="javascript:void(0)" id="marcdata">机读格式(MARC)</a>
+							</h3>
+
+							<div class="jp-booksInfo">
+								<div class="booksCover">
+									
+									<img src="http://img3.douban.com/lpic/s4610502.jpg" alt="《白夜行》" title="《白夜行》"id="bookimage" />
+								</div>
+								<div class="booksInfo" id="bookinfo">
+										<table border="0" cellpadding="0" cellspacing="0" width="100%" id="detailsTable">
+										
+										<tr><th>ISBN/价格：</th><td>978-7-5442-4251-6:CNY29.80</td></tr>
+<tr><th>作品语种：</th><td>chi  jpn</td></tr>
+<tr><th>出版国别：</th><td>CN  460000</td></tr>
+<tr><th>题名责任者项：</th><td>白夜行/.(日)东野圭吾著/.刘姿君译</td></tr>
+
+
+
+<tr><th>出版发行项：</th><td>海口:,南海出版公司:,2008</td></tr>
+<tr><th>载体形态项：</th><td>467页:;+21cm</td></tr>
+<tr><th>丛编项：</th><td>新经典文库.东野圭吾作品</td></tr>
+
+
+
+<tr><th>提要文摘：</th><td>将无望却坚守的凄凉爱情和执著而缜密的冷静推理完美结合，被众多“东饭”视作东野圭吾作品中的无冕之王，被称为东野笔下“最绝望的念想、最悲恸的守望”，出版之后引起巨大轰动，使东野圭吾成为天王级作家。2006年，小说被改编成同名电视连续剧，一举囊括第48届日剧学院奖四项大奖，与图书一同为作家带来如潮好评，使他成为日本、韩国与中国台湾等地最受欢迎的作家之一。“只希望能手牵手在太阳下散步”，这句象征《白夜行》故事内核的绝望念想，有如一个美丽的幌子，随着无数凌乱、压抑、悲凉的事件片段如纪录片一样一一还原，最后一丝温情也被完全抛弃，万千读者在一曲救赎罪恶的爱情之中悲切动容……</td></tr>
+<tr><th>分集：</th><td>东野圭吾作品</td></tr>
+<tr><th>并列题名：</th><td>ぴかくかこぅ  jpn</td></tr>
+
+<tr><th>题名主题：</th><td>推理小说   日本   现代</td></tr>
+
+<tr><th>中图分类：</th><td>I313.45</td></tr>
+<tr><th>个人名称等同：</th><td>东野圭吾  著</td></tr>
+<tr><th>个人名称次要：</th><td>刘姿君  译</td></tr>
+
+<tr><th>记录来源：</th><td>CN  LCDUT  20090503</td></tr>
+</table>
+								</div>
+
+								<div class="booksInfo" id="marcinfo" style="display: none">
+
+								</div>
+							</div>
+							<div class="jp-booksScore">
+								<div class="totalRating pull-left">
+									<span class="pull-left">总体评分：</span><span
+										class="pull-left booksScore"> <a
+										href="javascript:void(0)" class="scoreCurr" id="totalScore"></a>
+									</span><span class="pull-left" id="countScore">（共0人）</span>
+								</div>
+								<div class="myRating pull-left" id="myrating">
+									<span class="pull-left">我的评分：</span>
+									<span class="pull-left booksScore" id="bookstar"> 
+										<a href="javascript:void(0);" name="img" onclick="bookScore(1)" onmouseover="MouseOver(1)" onmouseout="MouseOut()"></a> 
+										<a href="javascript:void(0);" name="img" onclick="bookScore(2)" onmouseover="MouseOver(2)" onmouseout="MouseOut()"></a> 
+										<a href="javascript:void(0);" name="img" onclick="bookScore(3)" onmouseover="MouseOver(3)" onmouseout="MouseOut()"></a> 
+										<a href="javascript:void(0);" name="img" onclick="bookScore(4)" onmouseover="MouseOver(4)" onmouseout="MouseOut()"></a> 
+										<a href="javascript:void(0);" name="img" onclick="bookScore(5)" onmouseover="MouseOver(5)" onmouseout="MouseOut()"></a> 
+									</span>
+								</div>
+								<div class="pull-right">
+									<!--<a href="#user_appraise" class="btn">评论</a>-->
+									<a href="javascript:void(0);"
+										onclick="collect('898502','白夜行','图书','(日)东野圭吾著','南海出版公司','2008','I313.45/4641=3');"
+										id="collect" class="btn">收藏</a>
+								</div>
+							</div>
+							
+						
+							
+
+							<div class="tabbable">
+								
+								<h3 class="nav-tabs">
+									<a href="javascript:void(0);" class="current" id="agc"
+												onclick="showdiv('gc')">馆藏信息</a>
+										<a href="javascript:void(0);" id="afj" onclick="showdiv('fj')">附件信息</a>
+									<a href="javascript:void(0);" id="apl" onclick="showdiv('pl')">评论信息</a>
+									<a href="javascript:void(0);" id="alend" onclick="showdiv('lend')">相关借阅</a>
+									
+									<a href="javascript:void(0);" id="alendTrend" onclick="showdiv('lendTrend')">借阅趋势</a>
+										<!--  <a href="javascript:void(0);" id="abook" onclick="showdiv('book')">您可能感兴趣的图书</a> -->
+								</h3>
+
+								<div class="tab-content">
+									<!-- 馆藏信息 -->
+									<div class="tab-pane active" id="divgc" name="bookinfo">
+										
+									</div>
+									<!-- 附件信息 -->
+									<div class="tab-pane jp-booksAttachment" id="divfj"
+										name="bookinfo">
+
+									</div>
+
+									<!-- 图书评论 -->
+									<div class="tab-pane jp-booksCritique" id="divpl"
+										name="bookinfo">
+
+										<div class="booksCritique-login">
+											评论共
+											<span class="red" id="plcount"></span>条
+											
+													，<a href="/ucenter/login">请登录</a>后发表评论</div>
+
+										<form name="pinglun" id="pinglun">
+											<div class="booksCritique-input">
+												<input type="hidden" name="bookId" id="bookId"
+													value="898502" />
+												<input type="hidden" name="docTitle" id="docTitle"
+													value="白夜行" />
+												<input type="hidden" name="docType" id="docType"
+													value="图书" />
+												<input type="hidden" name="author" id="author"
+													value="(日)东野圭吾著" />
+												<input type="hidden" name="publisher" id="publisher"
+													value="南海出版公司" />
+												<input type="hidden" name="publishdate" id="publishdate"
+													value="2008" />
+												<input type="hidden" name="call_number" id="call_number"
+													value="I313.45/4641=3" />
+												<input type="hidden" name="corename" id="corename"
+													value="Book" />
+												<div class="booksCritique-text">
+													<font color='red'><label class="error" for="content" generated="true" ></label></font>
+													<textarea name="content" class="{required:true,maxlength:200,messages:{required:'评论内容不能为空',maxlength:'最多输入200字符'}}" cols="" rows="3" id="content"></textarea>
+												</div>
+												<div class="booksCritique-button">
+													<input name="" type="submit" id="sub"
+														class="btn btn-success" value="提交" />
+												</div>
+											</div>
+										</form>
+
+										<div class="booksCritique-list" style="display: none;">
+											<h3>
+												用户评论
+											</h3>
+											<ul id="pinluninfo" class="booksCritique-info">
+
+											</ul>
+										</div>
+
+									</div>
+									<!-- 现刊签到信息 -->
+									<div class="tab-pane" id="divjournal" name="bookinfo">
+										<ul id="tree" class="filetree">
+										</ul>
+									</div>
+
+									<!-- 相关借阅 -->
+									<div class="tab-pane" id="divlend" name="bookinfo">
+
+									</div>
+									<!-- 图书借阅量年度统计 -->
+									<div class="tab-pane" id="divlendTrend" name="bookinfo">
+										<div class="jp-booksStatistics">
+											<div id="container"></div>
+										</div>
+									</div>
+
+									<!-- 您可能感兴趣的图书 -->
+									</div>
+							</div>
+
+
+
+						</div>
+					</div>
+
+					<div class="jp-mainRight">
+						<div class="jp-content">
+											<h3>
+												借阅关系图
+											</h3>
+											<div class="jp-booksDiagram">
+												<a href="/opac/swf/relation_graph.html?id=898502"
+													target="_blank"><img
+														src="/styles/opac/images/visual.png"
+														alt="《白夜行》借阅关系图,点击查看详情"
+														title="《白夜行》借阅关系图,点击查看详情" />
+												</a>
+											</div>
+										</div>
+									<div class="jp-content margin-top">
+							<h3>
+								分享到
+							</h3>
+							<div class="jp-shareCustom bshare-custom">
+								<a class="bshare-douban" title="分享到豆瓣"
+									href="javascript:void(0);">豆瓣</a>
+								<a class="bshare-sinaminiblog" title="分享到新浪微博"
+									href="javascript:void(0);">新浪微博</a>
+								<a class="bshare-qqmb" title="分享到腾讯微博"
+									href="javascript:void(0);">腾讯微博</a>
+								<a class="bshare-renren" title="分享到人人网"
+									href="javascript:void(0);">人人网</a>
+								<a class="bshare-kaixin001" title="分享到开心网"
+									href="javascript:void(0);">开心网</a>
+								<a class="bshare-qqim" title="分享到QQ好友"
+									href="javascript:void(0);">QQ好友</a>
+								<a class="bshare-maikunote" title="分享到麦库记事"
+									href="javascript:void(0);">麦库</a>
+								<a class="bshare-tianya" title="分享到天涯"
+									href="javascript:void(0);">天涯</a>
+							</div>
+						</div>
+
+						<div class="jp-content margin-top">
+							<h3>
+								相关资源
+							</h3>
+							<ul class="jp-aboutResources" id="aboutResources">
+								<li>
+									<a href="http://www.douban.com/search?q=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+										target="_blank">豆瓣相关资源</a>
+								</li>
+								<!-- <li><a href="http://worldcat.org/search?q=" target="_blank">WorldCat相关资源</a></li> -->
+								<li>
+									<a href="http://www.google.com.hk/search?q=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+										target="_blank">google相关资源</a>
+								</li>
+								<li>
+									<a href="http://search.cnki.net/search.aspx?q=%E7%99%BD%E5%A4%9C%E8%A1%8C"
+										target="_blank">CNKI学术搜索</a>
+								</li>
+							</ul>
+						</div>
+
+						<div class="jp-content margin-top">
+							<h3>
+								二维码
+							</h3>
+							<div class="jp-viewQRCode">
+								<img width="200" height="200" id="imgQR"
+									alt="《白夜行》二维码" title="《白夜行》二维码" />
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+     </div>
+</div>  
+  <!--bottom-->
+  <div class="bottom">
+  <div class="container">  	
+    <div class="b_text clearfix">
+      <a target="_blank" href="/category216/detail_995.shtml">网站地图</a> <span>|</span><a target="_blank" href="/category41/index.shtml">联系我们</a> <span>|</span><a target="_blank" href="/category216/detail_993.shtml">版权信息</a> </div>
+    <div class="d_text">成都理工大学图书馆&nbsp;&nbsp;Copyright &copy; 2016 Chengdu university of technology library.</div>
+    <div class="code" style="width:280px">
+        <ul class="codeItems">
+          <li style="width:29%"><a target="_blank" ><span><img src="/styles/hunnu/images/weibo.png"></span></a><span class="bottompicname">图书馆微博</span></li>
+           <li style="width:29%"><a target="_blank"><span><img src="/styles/hunnu/images/weixin.png"></span></a><span class="bottompicname">图书馆微信</span></li>
+          <li style="width:29%"><a target="_blank" href="http://202.115.129.131/mlib/超星移动图书馆使用说明（发布）.doc"><span><img src="/styles/hunnu/images/erweimachaoxing.png"></span></a><span class="bottompicname">超星移动图书馆</span></li>
+        </ul>
+    </div>
+  </div>
+  	<!-- JiaThis Button BEGIN -->
+
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdPic":"/styles/hunnu/images/logo.png","bdDesc":"","bdText":"","bdMini":"2","bdMiniList":["qzone","tsina","weixin","renren","tqq","tqf","douban","sqq"],"bdStyle":"0","bdSize":"16"}
+,"slide":{"type":"slide","bdImg":"6","bdPos":"left","bdTop":"300"},"image":{"viewList":["qzone","tqq","tsina","renren","weixin"],"viewText":"分享到：","viewSize":"16"},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","tqq","tsina","renren","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+<!-- JiaThis Button END -->
+</div>
+</div>
+<script type="text/javascript">
+$(document).ready(function (){
+try{
+	//显示当前位置
+	var opac_current_span =  $("#current_nav").html();
+	
+	if(opac_current_span != null && opac_current_span !=""){
+		$("#current_nav2").html(opac_current_span);
+	}
+	
+	}catch(e){
+		$("current_nav2").html("");
+	}
+});
+</script>
+</body>
+</html>
